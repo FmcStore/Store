@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigitalStore - Toko Aplikasi Premium & Layanan SMM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5649c7;
+            --secondary: #ff7675;
+            --dark: #2d3436;
+            --light: #f7f7f7;
+            --gray: #636e72;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --elegant-gradient: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+            --card-shadow: 0 10px 30px rgba(108, 92, 231, 0.15);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fafafa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: var(--elegant-gradient);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+            color: white;
+        }
+        
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 1px;
+        }
+        
+        .tagline {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: -5px;
+        }
+        
+        .contact-button {
+            background-color: white;
+            color: var(--primary);
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: var(--elegant-gradient);
+            padding: 80px 0 60px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .feature {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            width: 180px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.25);
+        }
+        
+        .feature i {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: var(--warning);
+        }
+        
+        /* Categories */
+        .categories {
+            padding: 20px 0;
+            background-color: white;
+            position: sticky;
+            top: 80px;
+            z-index: 90;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .category-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            background: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .category-btn.active, .category-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: var(--primary-dark);
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(108, 92, 231, 0.25);
+        }
+        
+        .product-header {
+            padding: 20px 20px 15px;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+        }
+        
+        .product-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .product-price {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 10px 0;
+            color: var(--warning);
+        }
+        
+        .product-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-details {
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        
+        .product-badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            font-size: 12px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .product-notes {
+            font-size: 13px;
+            color: var(--gray);
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        /* Notes Section */
+        .notes {
+            background-color: #fff9e6;
+            border-left: 4px solid var(--warning);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 40px 0;
+        }
+        
+        .notes-title {
+            color: var(--dark);
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .notes-title i {
+            color: var(--warning);
+        }
+        
+        .notes-list {
+            list-style-type: none;
+        }
+        
+        .notes-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .notes-list li::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        
+        .contact-item i {
+            color: var(--primary);
+            margin-top: 4px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .features {
+                gap: 15px;
+            }
+            
+            .feature {
+                width: 150px;
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <div>
+                    <div class="logo-text">DigitalStore</div>
+                    <div class="tagline">Premium Accounts & SMM Services</div>
+                </div>
+            </a>
+            <a href="https://wa.me/6288708644467" class="contact-button">
+                <i class="fab fa-whatsapp"></i> Pesan Sekarang
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Aplikasi Premium & Layanan SMM</h1>
+            <p>Dapatkan akses premium ke berbagai layanan digital dengan harga terbaik. Proses cepat, kualitas terjamin, dan garansi memuaskan.</p>
+            
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-bolt"></i>
+                    <div>Proses Cepat</div>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <div>Garansi Aman</div>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-tags"></i>
+                    <div>Harga Terbaik</div>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-headset"></i>
+                    <div>Support 24/7</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Navigation -->
+    <section class="categories">
+        <div class="container">
+            <div class="category-nav">
+                <button class="category-btn active" data-category="all">Semua Produk</button>
+                <button class="category-btn" data-category="apps">Aplikasi Premium</button>
+                <button class="category-btn" data-category="smm">Layanan SMM</button>
+                <button class="category-btn" data-category="bundles">Paket Bundling</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products">
+        <div class="container">
+            <h2 class="section-title">Aplikasi Premium</h2>
+            
+            <div class="products-grid" id="apps-container">
+                <!-- Netflix Products -->
+                <div class="product-card" data-category="apps">
+                    <div class="product-header">
+                        <h3 class="product-title">Netflix 1u 7h</h3>
+                        <div class="product-price">Rp 9.400</div>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-details">
+                            <span class="product-badge">Netflix</span>
+                            <p>1 User - 7 Hari</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="apps">
+                    <div class="product-header">
+                        <h3 class="product-title">Netflix 2u 1b</h3>
+                        <div class="product-price">Rp 14.000</div>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-details">
+                            <span class="product-badge">Netflix</span>
+                            <p>2 User - 1 Bulan</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="apps">
+                    <div class="product-header">
+                        <h3 class="product-title">Netflix Semi 1b</h3>
+                        <div class="product-price">Rp 27.000</div>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-details">
+                            <span class="product-badge">Netflix</span>
+                            <p>Semi - 1 Bulan</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Canva Products -->
+                <div class="product-card" data-category="apps">
+                    <div class="product-header">
+                        <h3 class="product-title">Canva Mem 1b</h3>
+                        <div class="product-price">Rp 300p</div>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-details">
+                            <span class="product-badge">Canva</span>
+                            <p>Member - 1 Bulan</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="apps">
+                    <div class="product-header">
+                        <h3 class="product-title">Canva Owner 1b</h3>
+                        <div class="product-price">Rp 5.000</div>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-details">
+                            <span class="product-badge">Canva</span>
+                            <p>Owner - 1 Bulan</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="apps">
+                    <div class="product-header">
+                        <h3 class="product-title">Canva Edu</h3>
+                        <div class="product-price">Rp 4.500</div>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-details">
+                            <span class="product-badge">Canva</span>
+                            <p>Akun Pendidikan</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Streaming Services -->
+                <div class="product-card" data-category="apps">
+                    <div class="product-header">
+                        <h3 class="product-title">Disney+ 1b</h3>
+                        <div class="product-price">Rp 13.000</div>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-details">
+                            <span class="product-badge">Streaming</span>
+                            <p>1 Bulan Akses Penuh</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="apps">
+                    <div class="product-header">
+                        <h3 class="product-title">YouTube Mixplan 6b</h3>
+                        <div class="product-price">Rp 27.000</div>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-details">
+                            <span class="product-badge">YouTube Premium</span>
+                            <p>Mixplan 6 Bulan</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="apps">
+                    <div class="product-header">
+                        <h3 class="product-title">Spotify Fam 1b</h3>
+                        <div class="product-price">Rp 15.000</div>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-details">
+                            <span class="product-badge">Spotify</span>
+                            <p>Family Plan - 1 Bulan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title" style="margin-top: 80px;">Layanan SMM</h2>
+            
+            <div class="products-grid" id="smm-container">
+                <!-- SMM Services -->
+                <div class="product-card" data-category="smm">
+                    <div class="product-header">
+                        <h3 class="product-title">1000 Views TikTok</h3>
+                        <div class="product-price">Rp 30p</div>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-details">
+                            <span class="product-badge">TikTok</span>
+                            <p>Refill 30 Hari</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="smm">
+                    <div class="product-header">
+                        <h3 class="product-title">100 Likes TikTok</h3>
+                        <div class="product-price">Rp 170p</div>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-details">
+                            <span class="product-badge">TikTok</span>
+                            <p>Permanen</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="smm">
+                    <div class="product-header">
+                        <h3 class="product-title">100 Followers IG</h3>
+                        <div class="product-price">Rp 3.500</div>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-details">
+                            <span class="product-badge">Instagram</span>
+                            <p>Permanen</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="smm">
+                    <div class="product-header">
+                        <h3 class="product-title">100 Likes IG</h3>
+                        <div class="product-price">Rp 70p</div>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-details">
+                            <span class="product-badge">Instagram</span>
+                            <p>Permanen</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title" style="margin-top: 80px;">Paket Bundling</h2>
+            
+            <div class="products-grid" id="bundles-container">
+                <!-- Bundling Packages -->
+                <div class="product-card" data-category="bundles">
+                    <div class="product-header">
+                        <h3 class="product-title">Paket TikTok 1</h3>
+                        <div class="product-price">Rp 1.000</div>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-details">
+                            <span class="product-badge">TikTok</span>
+                            <p>500 Like + 10K Views</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="bundles">
+                    <div class="product-header">
+                        <h3 class="product-title">Paket TikTok 2</h3>
+                        <div class="product-price">Rp 2.800</div>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-details">
+                            <span class="product-badge">TikTok</span>
+                            <p>1000 Like + 50K Views</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="bundles">
+                    <div class="product-header">
+                        <h3 class="product-title">Paket TikTok 3</h3>
+                        <div class="product-price">Rp 15.300</div>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-details">
+                            <span class="product-badge">TikTok</span>
+                            <p>10K Like + 250K Views</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Important Notes -->
+            <div class="notes">
+                <h3 class="notes-title"><i class="fas fa-exclamation-circle"></i> Catatan Penting</h3>
+                <ul class="notes-list">
+                    <li>PROSES SLOW G BISA FAST KECUALI ADA STOK</li>
+                    <li>MAU FAST HARGA NORMAL KK</li>
+                    <li>TANYAIN STOK DULU JANGAN LANGSUNG TRANSFER</li>
+                    <li>WAJIB SCREENSHOT LOGIN SETELAH DIBERI AKUN. TIDAK ADA SCREENSHOT = TIDAK ADA GARANSI DAN NO RUSH</li>
+                    <li>SEMUA LAYANAN BERLAKU KELIPATAN, KECUALI PAKETAN TIDAK BERLAKU KELIPATAN</li>
+                    <li>PROSES FAST TERGANTUNG WEB, AKUN PRIVATE ANGUS NO KOAR-KOAR</li>
+                    <li>SELAMA PROSES DILARANG MENGOTAK-ATIK AKUN</li>
+                    <li>MEMBELI = PAHAM! NO REFUND!</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Tentang Kami</h3>
+                    <p>DigitalStore menyediakan berbagai akun premium dan layanan SMM dengan harga terbaik. Kami berkomitmen memberikan layanan berkualitas dengan proses cepat dan aman.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Kontak Kami</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <div>
+                                <a href="https://wa.me/6288708644467" style="color: white;">+62 887-0864-4467</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>guardianmarx@gmail.com</div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>Buka 24/7</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Metode Pembayaran</h3>
+                    <p>Kami menerima pembayaran melalui:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Transfer Bank (BCA, BRI, BNI, Mandiri)</li>
+                        <li>E-Wallet (Gopay, OVO, Dana, ShopeePay)</li>
+                        <li>QRIS</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 DigitalStore - Premium Apps & SMM Services. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Category Filtering
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const productCards = document.querySelectorAll('.product-card');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    const category = button.getAttribute('data-category');
+                    
+                    // Show/hide products based on category
+                    productCards.forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-category') === category) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+  </html>
